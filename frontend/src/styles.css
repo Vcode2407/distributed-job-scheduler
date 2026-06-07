@@ -1,0 +1,394 @@
+:root {
+  color: #1b2230;
+  background: #f6f8fb;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.app-shell {
+  width: min(1500px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 24px 0 40px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 0 20px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  min-width: 0;
+}
+
+.brand__mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  color: #ffffff;
+  background: #246bcb;
+  box-shadow: 0 8px 22px rgba(36, 107, 203, 0.22);
+  flex: 0 0 auto;
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.brand p,
+.panel__heading p,
+.metric-tile p,
+.metric-tile span,
+.secondary-cell {
+  margin: 0;
+  color: #6b7280;
+}
+
+.topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar__actions input {
+  width: 180px;
+  min-height: 38px;
+  border: 1px solid #d7dde8;
+  border-radius: 8px;
+  padding: 0 12px;
+  background: #ffffff;
+  color: #1b2230;
+}
+
+.button,
+.icon-button {
+  border: 1px solid #d7dde8;
+  background: #ffffff;
+  color: #1b2230;
+  cursor: pointer;
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.button:hover,
+.icon-button:hover {
+  border-color: #9fb0c9;
+  box-shadow: 0 8px 22px rgba(31, 42, 68, 0.08);
+}
+
+.button:active,
+.icon-button:active {
+  transform: translateY(1px);
+}
+
+.button:disabled,
+.icon-button:disabled {
+  cursor: wait;
+  opacity: 0.68;
+}
+
+.button {
+  min-height: 38px;
+  border-radius: 8px;
+  padding: 0 15px;
+  font-weight: 700;
+}
+
+.button--primary {
+  background: #246bcb;
+  border-color: #246bcb;
+  color: #ffffff;
+}
+
+.icon-button {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  display: inline-grid;
+  place-items: center;
+}
+
+.error-banner {
+  margin-bottom: 16px;
+  border-left: 4px solid #d84b4b;
+  border-radius: 8px;
+  padding: 12px 14px;
+  color: #8a2323;
+  background: #fff0f0;
+  overflow-wrap: anywhere;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.metric-tile,
+.panel {
+  background: #ffffff;
+  border: 1px solid #dfe5ef;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(31, 42, 68, 0.06);
+}
+
+.metric-tile {
+  min-height: 118px;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 13px;
+  padding: 18px;
+}
+
+.metric-tile__icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+}
+
+.metric-tile strong {
+  display: block;
+  margin-top: 6px;
+  font-size: 1.55rem;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.metric-tile span {
+  display: block;
+  margin-top: 7px;
+  font-size: 0.86rem;
+}
+
+.metric-tile--blue .metric-tile__icon {
+  color: #246bcb;
+  background: #e9f1ff;
+}
+
+.metric-tile--green .metric-tile__icon {
+  color: #1e9b73;
+  background: #e8f7f1;
+}
+
+.metric-tile--red .metric-tile__icon {
+  color: #d84b4b;
+  background: #fff0f0;
+}
+
+.metric-tile--amber .metric-tile__icon {
+  color: #a76311;
+  background: #fff5df;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(360px, 0.75fr);
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.content-grid--wide {
+  grid-template-columns: minmax(0, 1.4fr) minmax(360px, 0.6fr);
+}
+
+.panel {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.panel__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px 18px 12px;
+  border-bottom: 1px solid #edf0f5;
+}
+
+.panel__heading h2 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.panel__heading svg {
+  color: #69768a;
+  flex: 0 0 auto;
+}
+
+.chart-frame {
+  height: 300px;
+  padding: 8px 10px 12px;
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 620px;
+}
+
+th,
+td {
+  padding: 13px 18px;
+  text-align: left;
+  border-bottom: 1px solid #edf0f5;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+th {
+  color: #667085;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+td {
+  font-size: 0.91rem;
+}
+
+tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.primary-cell,
+.secondary-cell {
+  display: block;
+}
+
+.primary-cell {
+  font-weight: 750;
+  color: #1b2230;
+}
+
+.secondary-cell {
+  margin-top: 3px;
+  font-size: 0.8rem;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 26px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.status-pill--green {
+  color: #11684d;
+  background: #e8f7f1;
+}
+
+.status-pill--blue {
+  color: #1f5fae;
+  background: #e9f1ff;
+}
+
+.status-pill--amber {
+  color: #8f570e;
+  background: #fff5df;
+}
+
+.status-pill--red {
+  color: #a92f2f;
+  background: #fff0f0;
+}
+
+.status-pill--neutral {
+  color: #536173;
+  background: #eef2f7;
+}
+
+.action-cell {
+  text-align: right;
+}
+
+.empty-cell {
+  height: 84px;
+  color: #69768a;
+  text-align: center;
+}
+
+.spin {
+  animation: spin 900ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1100px) {
+  .metric-grid,
+  .content-grid,
+  .content-grid--wide {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .app-shell {
+    width: min(100% - 20px, 1500px);
+    padding-top: 12px;
+  }
+
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .topbar__actions {
+    width: 100%;
+  }
+
+  .topbar__actions input {
+    width: 100%;
+  }
+
+  .metric-grid,
+  .content-grid,
+  .content-grid--wide {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-tile {
+    min-height: 104px;
+  }
+}

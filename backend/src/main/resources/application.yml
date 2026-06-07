@@ -1,0 +1,82 @@
+server:
+  port: ${SERVER_PORT:8080}
+  shutdown: graceful
+
+spring:
+  application:
+    name: distributed-job-scheduler
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/jobscheduler}
+    username: ${SPRING_DATASOURCE_USERNAME:jobscheduler}
+    password: ${SPRING_DATASOURCE_PASSWORD:jobscheduler}
+    hikari:
+      maximum-pool-size: ${DB_POOL_MAX:20}
+      minimum-idle: ${DB_POOL_MIN:5}
+      connection-timeout: 30000
+  flyway:
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        format_sql: false
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    consumer:
+      group-id: ${KAFKA_CONSUMER_GROUP:job-scheduler}
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      properties:
+        spring.json.trusted.packages: com.example.scheduler.*
+    listener:
+      ack-mode: manual
+  data:
+    redis:
+      host: ${SPRING_REDIS_HOST:localhost}
+      port: ${SPRING_REDIS_PORT:6379}
+      repositories:
+        enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus,metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  tracing:
+    sampling:
+      probability: ${MANAGEMENT_TRACING_SAMPLING_PROBABILITY:1.0}
+  otlp:
+    tracing:
+      endpoint: ${MANAGEMENT_OTLP_TRACING_ENDPOINT:http://localhost:4318/v1/traces}
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+app:
+  kafka:
+    job-events-topic: ${APP_KAFKA_JOB_EVENTS_TOPIC:job-events}
+    job-events-retry-topic: ${APP_KAFKA_JOB_EVENTS_RETRY_TOPIC:job-events.retry}
+    job-events-dlq-topic: ${APP_KAFKA_JOB_EVENTS_DLQ_TOPIC:job-events.dlq}
+  scheduler:
+    lease-duration: ${APP_LEASE_DURATION:PT5M}
+    lease-batch-size: ${APP_LEASE_BATCH_SIZE:100}
+    outbox-batch-size: ${APP_OUTBOX_BATCH_SIZE:100}
+    heartbeat-timeout: ${APP_HEARTBEAT_TIMEOUT:PT1M}
+  security:
+    jwt-secret: ${APP_JWT_SECRET:change-me-change-me-change-me-change-me}
+    token-ttl: ${APP_TOKEN_TTL:PT8H}
+    dev-token-enabled: ${APP_DEV_TOKEN_ENABLED:true}
+    rate-limit:
+      capacity: ${APP_RATE_LIMIT_CAPACITY:120}
+      refill-per-minute: ${APP_RATE_LIMIT_REFILL_PER_MINUTE:120}
